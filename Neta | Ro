@@ -1,0 +1,79 @@
+-- إعدادات الإضاءة
+local a = game.Lighting
+a.Ambient = Color3.fromRGB(33, 33, 33)
+a.Brightness = 5.69
+a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
+a.EnvironmentDiffuseScale = 0.105
+a.EnvironmentSpecularScale = 0.522
+a.GlobalShadows = true
+a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
+a.ShadowSoftness = 0.18
+a.GeographicLatitude = -15.525
+a.ExposureCompensation = 0.75
+
+-- إضافة BloomEffect لتحسين الإضاءة
+local b = Instance.new("BloomEffect", a)
+b.Enabled = true
+b.Intensity = 1.2  -- زيادة شدة التأثير
+b.Size = 9999 
+b.Threshold = 0.1  -- خفض العتبة لزيادة النعومة
+
+-- إضافة DepthOfFieldEffect لخلق تأثير العمق
+local d = Instance.new("DepthOfFieldEffect", a)
+d.Enabled = true
+d.FarIntensity = 0.077
+d.FocusDistance = 21.54
+d.InFocusRadius = 20.77
+d.NearIntensity = 0.277
+
+-- إضافة SunRaysEffect لتأثير أشعة الشمس
+local s = Instance.new("SunRaysEffect", a)
+s.Enabled = true
+s.Intensity = 0.2  -- زيادة الشدة لتوضيح الأشعة
+s.Spread = 0.146
+
+-- إضافة تأثير ColorCorrection لتحسين الألوان
+local c = Instance.new("ColorCorrectionEffect", a)
+c.Brightness = 0.015
+c.Contrast = 0.35  -- زيادة التباين لتفاصيل أفضل
+c.Saturation = 0.4  -- زيادة التشبع لجعل الألوان أكثر حيوية
+c.Enabled = true
+c.TintColor = Color3.fromRGB(217, 145, 57)
+
+if getgenv().mode == "Summer" then
+ c.TintColor = Color3.fromRGB(255, 220, 148)
+elseif getgenv().mode == "Autumn" then
+ c.TintColor = Color3.fromRGB(217, 145, 57)
+else
+ warn("No mode selected!")
+ print("Please select a mode")
+ b:Destroy()
+ c:Destroy()
+end
+
+-- إضافة تأثير ثاني من ColorCorrection
+local e2 = Instance.new("ColorCorrectionEffect", a)
+e2.Brightness = 0.2
+e2.Contrast = 0.45
+e2.Saturation = -0.1
+e2.Enabled = true
+e2.TintColor = Color3.fromRGB(255, 255, 255)
+
+-- تأثير إضافي للسطوع والتباين
+local e3 = Instance.new("ColorCorrectionEffect", a)
+e3.Brightness = 0.05
+e3.Contrast = 0.5
+e3.Saturation = 0.2
+e3.Enabled = true
+e3.TintColor = Color3.fromRGB(255, 245, 220)
+
+print("RTX Graphics with Enhanced Lighting loaded!")
+
+-- إضافة رسالة "NETA | RO - Join Discord!"
+local message = Instance.new("Message", game.Workspace)
+message.Text = "NETA | RO - Join Discord!"
+
+-- إخفاء الرسالة بعد 5 ثواني
+wait(5)
+message:Destroy()
